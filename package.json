@@ -1,0 +1,21 @@
+{
+  "name": "uwuifier",
+  "version": "1.0.0",
+  "description": "makes your messages very uwu",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "scripts": {
+    "build": "replugged build plugin",
+    "watch": "replugged build plugin --watch",
+    "bundle": "replugged bundle plugin",
+    "check": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "ConfiG",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.11.2",
+    "replugged": "^4.1.0"
+  }
+}

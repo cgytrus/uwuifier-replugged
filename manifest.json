@@ -1,0 +1,18 @@
+{
+  "id": "mod.cgytrus.uwuifier",
+  "name": "uwuifier",
+  "description": "makes your messages very uwu",
+  "author": {
+    "name": "ConfiG",
+    "discordID": "357517231854190592",
+    "github": "cgytrus"
+  },
+  "version": "1.0.0",
+  "updater": {
+    "type": "github",
+    "id": "cgytrus/uwuifier-replugged"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "src/index.js"
+}
