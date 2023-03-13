@@ -42,7 +42,7 @@ export async function start() {
         /^<@&(?<id>\d{17,19})>$/gd, // role
         /^<@!?(?<id>\d{17,19})>$/gd, // user
         /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)/gd, // link
-        /^(@everyone|@here)$/gd, // global ping
+        /^(@everyone|@here|@silent)$/gd, // global ping
         /\`\`\`.*\`\`\`/gsd, // multi-line code
         /\`.*\`/gsd // single-line code
     ];
