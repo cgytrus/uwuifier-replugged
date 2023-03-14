@@ -1,6 +1,6 @@
 {
   "name": "uwuifier",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "makes your messages very uwu",
   "engines": {
     "node": ">=14.0.0"
