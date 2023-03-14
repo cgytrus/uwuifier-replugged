@@ -1,8 +1,9 @@
 import { common, components, util } from 'replugged';
 const { React } = common;
 const { SliderItem, SwitchItem } = components;
+import * as uwuifier from '../uwuifier';
 
-export function Settings(cfg, uwuifier) {
+export function Settings(cfg) {
     function uwuifyIfEnabled(text) {
         return cfg.get('enabled') ? uwuifier.uwuify(text) : text;
     }
