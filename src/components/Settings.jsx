@@ -1,6 +1,6 @@
 import { common, components, util } from 'replugged';
 const { React } = common;
-const { SliderItem, SwitchItem } = components;
+const { SliderItem, SwitchItem, ButtonItem, Button } = components;
 import * as uwuifier from '../uwuifier';
 
 export function Settings(cfg) {
@@ -57,5 +57,15 @@ export function Settings(cfg) {
         >
             {uwuifyIfEnabled('Duplicate characters amount')}
         </SliderItem>
+        <ButtonItem button={uwuifyIfEnabled('Reset')}
+            note={uwuifyIfEnabled('Re-enter settings to see the default settings after resetting them')}
+            color={Button.Colors.RED}
+            onClick={() => {
+                for(const setting of Object.keys(cfg.all())) {
+                    cfg.delete(setting);
+                }
+            }}>
+            {uwuifyIfEnabled('Reset settings')}
+        </ButtonItem>
     </div>;
 }
