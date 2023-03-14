@@ -10,6 +10,13 @@ export function Settings(cfg, uwuifier) {
         <SwitchItem {...util.useSetting(cfg, 'enabled')}>
             {uwuifyIfEnabled('Enabled')}
         </SwitchItem>
+        <SwitchItem {...util.useSetting(cfg, 'reverseSubmitButton')}
+            note={uwuifyIfEnabled(
+                `When uwuifier is enabled: don't uwuify the message if sent using the Send Message button
+                When uwuifier is disabled: uwuify the message if sent using the Send Message button`
+            )}>
+            {uwuifyIfEnabled('Reverse Send Message button behavior')}
+        </SwitchItem>
         <SliderItem {...util.useSetting(cfg, 'periodToExclamationChance')}
             note={uwuifyIfEnabled('Chance of a period being replaced with an exclamation mark')}
             minValue={0}

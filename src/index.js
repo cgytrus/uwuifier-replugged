@@ -9,6 +9,7 @@ import findInReactTree from './findInReactTree';
 
 const defaultSettings = {
     enabled: true,
+    reverseSubmitButton: false,
     periodToExclamationChance: uwuifier.settings.periodToExclamationChance,
     stutterChance: uwuifier.settings.stutterChance,
     presuffixChance: uwuifier.settings.presuffixChance,
@@ -94,36 +95,31 @@ export async function start() {
     const CTAC = replugged.webpack.getBySource(".slateTextArea");
     injector.after(CTAC.type, 'render', (_, res) => {
         const editor = findInReactTree(res, x => x.props?.promptToUpload && x.props.onSubmit);
-        if(editor == null)
-            return res;
-        editor.props.onSubmit = (original => function(o, a, u, s) {
-            if(cfg.get('enabled'))
-                o = uwuifyMessage(o, true);
-            return original(o, a, u, s);
-        })(editor.props.onSubmit);
+        const rightSideButtons = findInReactTree(res, x => x.props?.channel && x.props.handleSubmit);
+        let isSubmitButton = false;
+        if(rightSideButtons != null) {
+            rightSideButtons.props.handleSubmit = (original => function(...args) {
+                isSubmitButton = true;
+                return original(...args);
+            })(rightSideButtons.props.handleSubmit);
+        }
+        if(editor != null) {
+            editor.props.onEnter = (original => function(...args) {
+                isSubmitButton = false;
+                return original(...args);
+            })(editor.props.onEnter);
+            editor.props.onSubmit = (original => function(...args) {
+                if(isSubmitButton && cfg.get('reverseSubmitButton') ? !cfg.get('enabled') : cfg.get('enabled'))
+                    args[0] = uwuifyMessage(args[0], true);
+                return original(...args);
+            })(editor.props.onSubmit);
+        }
         return res;
     });
-
-    /*commands.registerCommand({
-        name: 'uwu',
-        description: uwuifier.uwuify('Toggle uwuifying for this message.', true),
-        usage: '{c} [message]',
-        executor: args => ({
-            send: true,
-            result: cfg.get('enabled') ? args.join(' ') : uwuifyMessage(args.join(' '), false)
-        }),
-        options: {
-            type: 1,
-            name: 'uwu',
-            description: uwuifier.uwuify('Toggle uwuifying for this message.', true),
-            required: true
-        }
-    });*/
 }
 
 export function stop() {
     injector.uninjectAll();
-    //commands.unregisterCommand('uwu');
 }
 
 function sendEphemeralMessage(content, username = 'Clyde', avatar = 'clyde') {
