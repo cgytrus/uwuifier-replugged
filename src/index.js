@@ -62,18 +62,8 @@ export async function start() {
         return false;
     }
 
-    function startsWithCommand(string) {
-        /*for(let [command] of Object.entries(powercord.api.commands.commands)) {
-            if(string.startsWith(`${powercord.api.commands.prefix}${command}`))
-                return true;
-        }*/
-        return false;
-    }
-
-    function uwuifyMessage(message, checkForCommand) {
+    function uwuifyMessage(message) {
         try {
-            if(checkForCommand && startsWithCommand(message))
-                return message;
             return uwuifier.uwuify(message, true, isIgnoredAt);
         }
         catch(error) {
@@ -110,7 +100,7 @@ export async function start() {
             })(editor.props.onEnter);
             editor.props.onSubmit = (original => function(...args) {
                 if(isSubmitButton && cfg.get('reverseSubmitButton') ? !cfg.get('enabled') : cfg.get('enabled'))
-                    args[0] = uwuifyMessage(args[0], true);
+                    args[0] = uwuifyMessage(args[0]);
                 return original(...args);
             })(editor.props.onSubmit);
         }
