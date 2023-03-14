@@ -12,9 +12,8 @@ export function Settings(cfg, uwuifier) {
         </SwitchItem>
         <SwitchItem {...util.useSetting(cfg, 'reverseSubmitButton')}
             note={uwuifyIfEnabled(
-                `When uwuifier is enabled: don't uwuify the message if sent using the Send Message button
-                When uwuifier is disabled: uwuify the message if sent using the Send Message button`
-            )}>
+                'Makes the Send Message button act as if the Enabled option is the opposite of what it is. ' +
+                'The Send Message button can be enabled in Accessibility settings')}>
             {uwuifyIfEnabled('Reverse Send Message button behavior')}
         </SwitchItem>
         <SliderItem {...util.useSetting(cfg, 'periodToExclamationChance')}
