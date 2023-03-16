@@ -1,5 +1,5 @@
 import { Injector, Logger } from 'replugged';
-const injector = new Injector();
+const inject = new Injector();
 const logger = Logger.plugin('uwuifier');
 
 import * as uwuifier from './uwuifier';
@@ -59,7 +59,7 @@ export async function start() {
     assignUwuifierSetting('duplicateCharactersAmount');
 
     const CTAC = replugged.webpack.getBySource(".slateTextArea");
-    injector.after(CTAC.type, 'render', (_, res) => {
+    inject.after(CTAC.type, 'render', (_, res) => {
         const editor = findInReactTree(res, x => x.props?.promptToUpload && x.props.onSubmit);
         const rightSideButtons = findInReactTree(res, x => x.props?.channel && x.props.handleSubmit);
         let isSubmitButton = false;
@@ -85,5 +85,5 @@ export async function start() {
 }
 
 export function stop() {
-    injector.uninjectAll();
+    inject.uninjectAll();
 }
