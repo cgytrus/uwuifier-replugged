@@ -57,6 +57,15 @@ export function Settings(cfg) {
         >
             {uwuifyIfEnabled('Duplicate characters amount')}
         </SliderItem>
+        <SwitchItem {...util.useSetting(cfg, 'uwuifyUi')}
+            note={uwuifyIfEnabled('Please, just... don\'t')}>
+            {uwuifyIfEnabled('uwuify UI')}
+        </SwitchItem>
+        <SwitchItem {...util.useSetting(cfg, 'uwuifyConsole')}
+            style={cfg.get('uwuifyUi') ? {} : { display: 'none' }}
+            note={uwuifyIfEnabled('Seriously, this is getting a bit too far')}>
+            {uwuifyIfEnabled('uwuify console')}
+        </SwitchItem>
         <ButtonItem button={uwuifyIfEnabled('Reset')}
             note={uwuifyIfEnabled('Re-enter settings to see the default settings after resetting them')}
             color={Button.Colors.RED}
